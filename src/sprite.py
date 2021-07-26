@@ -4,8 +4,8 @@ from src.spatial import Spatial
 from src.globals import *
 
 class Sprite(Spatial):
-    def __init__(self, imgPath):
-        super().__init__()
+    def __init__(self, imgPath, size):
+        super().__init__(size)
         self.vFrame = 0
         self.hFrame = 0
         self.image = pygame.image.load(imgPath).convert_alpha()
