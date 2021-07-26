@@ -1,3 +1,4 @@
+from src.laserManager import LaserManager
 from src.mapManager import MapManager
 from src.sprite import Sprite
 from src.inputMap import InputMap
@@ -10,13 +11,16 @@ class World:
         pass
 
     def init(self):
-        self.player = Player()
+        self.laserManager = LaserManager()
+        self.player = Player(self.laserManager)
+        self.player.load()
         self.mapManager = MapManager()
         self.mapManager.load()
 
+
     def update(self, delta, inputMap):
         self.mapManager.update(delta)
-        self.player.update(delta, inputMap)
+        self.player.update(delta, True, inputMap)
 
     def render(self, surface):
         self.mapManager.render(surface)

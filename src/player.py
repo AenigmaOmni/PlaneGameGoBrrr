@@ -2,16 +2,24 @@ from src.sprite import Sprite
 from src.globals import *
 
 class Player(Sprite):
-    def __init__(self):
+    def __init__(self, lm):
         super().__init__("res/ships_packed.png", PLANE_SIZE)
         self.hFrame = 0
         self.vFrame = 0
         self.x = WINDOW_WIDTH / 2 - REAL_PLANE_SIZE / 2
         self.y = WINDOW_HEIGHT - REAL_PLANE_SIZE - 20
-        self.scale()
-        self.real_pixel_size = self.size * SCALE_FACTOR 
 
-    def update(self, delta, inputMap):
+        self.laserManager = lm
+
+        self.canFire = True
+        self.fireTimer = 0
+        self.fireDelay = 0.1
+
+    def load(self):
+        super().load()
+        self.scale()
+
+    def update(self, delta, doClamp, inputMap):
         if inputMap.w == True:
             self.move_y = -1
         elif inputMap.s == True:
@@ -21,4 +29,14 @@ class Player(Sprite):
         elif inputMap.d == True:
             self.move_x = 1
 
-        super().update(delta)
+        super().update(delta, doClamp)
+
+        if inputMap.space == True:
+            self.canFire = False
+            self.laserManager.playerFire(self.x, self.y)
+
+        if not self.canFire:
+            self.fireTimer += delta
+            if self.fireTimer >= self.fireDelay:
+                self.fireTimer = 0
+                self.canFire = True

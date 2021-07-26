@@ -12,13 +12,14 @@ class Spatial:
         self.real_pixel_size = None
         self.rect = pygame.Rect(self.x, self.y, self.size, self.size)
 
-    def update(self, delta):
+    def update(self, delta, doClamp):
         self.x = self.x + (self.move_x * delta * self.speed)
         self.y = self.y + (self.move_y * delta * self.speed)
         self.rect = pygame.Rect(self.x, self.y, self.size, self.size)
         self.move_x = 0
         self.move_y = 0
-        self.clamp_to_world()
+        if doClamp:
+            self.clamp_to_world()
     
     def clamp_to_world(self):
         if self.x < 0:
