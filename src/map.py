@@ -4,6 +4,8 @@ from src.globals import *
 
 class Map:
     def __init__(self, path):
+        self.x = 0
+        self.y = 0
         self.tiled_map = load_pygame(path)
         self.width = self.tiled_map.width
         self.height = self.tiled_map.height
@@ -23,6 +25,6 @@ class Map:
         self.image.convert()
 
     def render(self, surface):
-        surface.blit(self.image, (0,0))
+        surface.blit(self.image, (self.x, self.y))
 
         
