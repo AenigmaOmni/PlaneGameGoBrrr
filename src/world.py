@@ -1,4 +1,5 @@
 from src.sprite import Sprite
+from src.inputMap import InputMap
 from src.globals import *
 
 class World:
@@ -13,8 +14,17 @@ class World:
         self.player.y = WINDOW_HEIGHT - REAL_PLANE_SIZE - 20
         self.player.scale(SCALE_FACTOR)
 
-    def update(self, delta):
-        pass
+    def update(self, delta, inputMap):
+        if inputMap.w == True:
+            self.player.move_y = -1
+        elif inputMap.s == True:
+            self.player.move_y = 1
+        if inputMap.a == True:
+            self.player.move_x = -1
+        elif inputMap.d == True:
+            self.player.move_x = 1
+
+        self.player.update(delta)
 
     def render(self, surface):
         self.player.render(surface)

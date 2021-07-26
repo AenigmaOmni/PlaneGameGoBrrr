@@ -43,7 +43,7 @@ class Game:
         self.lastTime = t
 
         #do updating here
-        self.world.update(delta)
+        self.world.update(delta, self.inputMap)
         
         #stop updating
 
