@@ -19,8 +19,8 @@ class Sprite(Spatial):
         self.image = pygame.transform.scale(self.image, (self.size * SCALE_FACTOR, self.size * SCALE_FACTOR))
         self.real_pixel_size = self.size * SCALE_FACTOR
         
-    def update(self, delta, doClamp):
-        super().update(delta, doClamp)
+    def update(self, delta, doClamp, cont):
+        super().update(delta, doClamp, cont)
 
     def render(self, surface):
         surface.blit(self.image, (self.x, self.y))

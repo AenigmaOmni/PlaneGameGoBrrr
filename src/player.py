@@ -29,11 +29,12 @@ class Player(Sprite):
         elif inputMap.d == True:
             self.move_x = 1
 
-        super().update(delta, doClamp)
+        super().update(delta, doClamp, False)
 
         if inputMap.space == True:
-            self.canFire = False
-            self.laserManager.playerFire(self.x, self.y)
+            if self.canFire:
+                self.canFire = False
+                self.laserManager.playerFire(self.x + self.size / 2, self.y)
 
         if not self.canFire:
             self.fireTimer += delta

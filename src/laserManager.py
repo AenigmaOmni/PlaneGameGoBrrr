@@ -7,6 +7,8 @@ class LaserManager:
 
     def playerFire(self, x, y):
         laser = Laser(x, y)
+        laser.load()
+        laser.scale()
         self.playerLasers.append(laser)
     
     def enemyFIre(self):
@@ -14,5 +16,18 @@ class LaserManager:
         pass
 
     def update(self, delta):
+        #update lasers
         for laser in self.playerLasers:
-            laser.update(delta)
+            laser.update(delta, False, True)
+
+        #remove lasers that have gone offscreen
+        alive = []
+        for laser in self.playerLasers:
+            if laser.y > -50:
+                alive.append(laser)
+
+        self.playerLasers = alive
+
+    def render(self, surface):
+        for laser in self.playerLasers:
+            laser.render(surface)

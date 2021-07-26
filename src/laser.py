@@ -6,5 +6,5 @@ class Laser(Sprite):
         super().__init__("res/bullets_and_fx.png", BULLET_SIZE)
         self.x = x
         self.y = y
-        self.speed = 100
+        self.speed = 700
         self.move_y = -1
