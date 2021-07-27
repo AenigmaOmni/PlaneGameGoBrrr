@@ -18,6 +18,8 @@ class EnemyManager:
         e.speed = speed
         e.load()
         e.scale()
+        e.load_tint_surface()
+        e.apply_tint()
         e.x = randint(16, WINDOW_WIDTH - REAL_PLANE_SIZE)
         e.y = -REAL_PLANE_SIZE
         e.move_y = 1
