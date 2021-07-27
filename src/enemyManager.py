@@ -11,16 +11,67 @@ class EnemyManager:
     
         self.enemies = []
 
+    def spawnEnemy(self, v, h, speed):
+        e = Enemy()
+        e.vFrame = v
+        e.hFrame = h
+        e.speed = speed
+        e.load()
+        e.scale()
+        e.x = randint(16, WINDOW_WIDTH - REAL_PLANE_SIZE)
+        e.y = -REAL_PLANE_SIZE
+        e.move_y = 1
+        return e
+
+    def spawnPlane(self, color, size):
+        if color == "Red":
+            if size == "Big":
+                e = self.spawnEnemy(0, 1, 80)
+                self.enemies.append(e)
+
+            else: #Red Small
+                e = self.spawnEnemy(1, 1, 60)
+    
+        elif color == "Green":
+            if size == "Big":
+                e = self.spawnEnemy(0, 2, 100)
+                self.enemies.append(e)
+
+            else: #Green Small
+                e = self.spawnEnemy(1, 2, 80)
+                self.enemies.append(e)
+        
+        elif color == "Yellow":
+            if size == "Big":
+                e = self.spawnEnemy(0, 3, 110)
+                self.enemies.append(e)
+
+            else: #Yellow Small
+                e = self.spawnEnemy(1, 3, 100)
+                self.enemies.append(e)
+
     def spawn(self, count):
         for i in range(0, count):
-            e = Enemy()
-            e.load()
-            e.scale()
-            e.x = randint(16, WINDOW_WIDTH - PLANE_SIZE)
-            e.y = -REAL_PLANE_SIZE
-            e.move_y = 1
-            e.speed = 100
-            self.enemies.append(e)
+            c = randint(1, 3)
+            if c == 1:
+                s = randint(1, 2)
+                if s == 1:
+                    self.spawnPlane("Red", "Big")
+                else:
+                    self.spawnPlane("Red", "Small")
+            elif c == 2:
+                s = randint(1, 2)
+                if s == 1:
+                    self.spawnPlane("Green", "Big")
+                else:
+                    self.spawnPlane("Green", "Small")
+            elif c == 3:
+                s = randint(1, 2)
+                if s == 1:
+                    self.spawnPlane("Yellow", "Big")
+                else:
+                    self.spawnPlane("Yellow", "Small")
+
 
     def update_enemies(self, delta):
         for enemy in self.enemies:
