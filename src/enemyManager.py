@@ -11,7 +11,7 @@ class EnemyManager:
     
         self.enemies = []
 
-    def spawnEnemy(self, v, h, speed):
+    def spawnEnemy(self, v, h, speed, hp):
         e = Enemy()
         e.vFrame = v
         e.hFrame = h
@@ -21,33 +21,34 @@ class EnemyManager:
         e.x = randint(16, WINDOW_WIDTH - REAL_PLANE_SIZE)
         e.y = -REAL_PLANE_SIZE
         e.move_y = 1
+        e.hp = hp
         return e
 
     def spawnPlane(self, color, size):
         if color == "Red":
             if size == "Big":
-                e = self.spawnEnemy(0, 1, 80)
+                e = self.spawnEnemy(0, 1, 80, 2)
                 self.enemies.append(e)
 
             else: #Red Small
-                e = self.spawnEnemy(1, 1, 60)
+                e = self.spawnEnemy(1, 1, 60, 1)
     
         elif color == "Green":
             if size == "Big":
-                e = self.spawnEnemy(0, 2, 100)
+                e = self.spawnEnemy(0, 2, 100, 3)
                 self.enemies.append(e)
 
             else: #Green Small
-                e = self.spawnEnemy(1, 2, 80)
+                e = self.spawnEnemy(1, 2, 80, 2)
                 self.enemies.append(e)
         
         elif color == "Yellow":
             if size == "Big":
-                e = self.spawnEnemy(0, 3, 110)
+                e = self.spawnEnemy(0, 3, 110, 4)
                 self.enemies.append(e)
 
             else: #Yellow Small
-                e = self.spawnEnemy(1, 3, 100)
+                e = self.spawnEnemy(1, 3, 100, 3)
                 self.enemies.append(e)
 
     def spawn(self, count):

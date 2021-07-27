@@ -12,3 +12,10 @@ class Enemy(Sprite):
         self.canFire = True
         self.fireTimer = 0
         self.fireDelay = 0.1
+
+        self.hp = 1
+
+    def takeDamage(self, damage):
+        self.hp -= damage
+        if self.hp <= 0:
+            self.alive = False

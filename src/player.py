@@ -14,6 +14,7 @@ class Player(Sprite):
         self.canFire = True
         self.fireTimer = 0
         self.fireDelay = 0.1
+        self.damage = 1
 
     def load(self):
         super().load()

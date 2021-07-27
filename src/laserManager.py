@@ -32,7 +32,7 @@ class LaserManager:
         for bullet in self.playerLasers:
             for enemy in enemies:
                 if bullet.rect.colliderect(enemy.rect):
-                    enemy.alive = False
+                    enemy.takeDamage(player.damage)
                     bullet.alive = False
         #check player collision with enemy lasers
         for bullet in self.enemyLasers:
