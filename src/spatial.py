@@ -15,7 +15,7 @@ class Spatial:
     def update(self, delta, doClamp, cont):
         self.x = self.x + (self.move_x * delta * self.speed)
         self.y = self.y + (self.move_y * delta * self.speed)
-        self.rect = pygame.Rect(self.x, self.y, self.size, self.size)
+        self.rect = pygame.Rect(self.x, self.y, self.real_pixel_size, self.real_pixel_size)
         if not cont:
             self.move_x = 0
             self.move_y = 0

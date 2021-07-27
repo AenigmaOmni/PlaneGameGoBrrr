@@ -8,3 +8,4 @@ class Laser(Sprite):
         self.y = y
         self.speed = 700
         self.move_y = -1
+        self.alive = True

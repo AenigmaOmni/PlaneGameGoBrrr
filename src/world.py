@@ -25,7 +25,7 @@ class World:
     def update(self, delta, inputMap):
         self.mapManager.update(delta)
         self.player.update(delta, True, inputMap)
-        self.laserManager.update(delta)
+        self.laserManager.update(delta, self.player, self.enemyManager.enemies)
         self.enemyManager.update(delta)
 
     def render(self, surface):
