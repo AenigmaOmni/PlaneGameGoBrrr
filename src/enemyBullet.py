@@ -1,5 +1,6 @@
 from src.sprite import Sprite
 from src.globals import *
+import pygame
 
 class EnemyBullet(Sprite):
 
@@ -12,3 +13,7 @@ class EnemyBullet(Sprite):
         self.move_y = 1
         self.alive = True
         self.hFrame = 2
+
+    def load(self):
+        super().load()
+        self.image = pygame.transform.flip(self.image, 0, 1)
