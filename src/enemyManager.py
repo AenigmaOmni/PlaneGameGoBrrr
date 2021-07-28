@@ -5,7 +5,7 @@ from random import *
 class EnemyManager:
     def __init__(self, lm):
         self.laserManager = lm
-        self.spawnDelay = 3
+        self.spawnDelay = randint(1, 3)
         self.maxSpawns = 4
         self.spawnTimer = 0
     
@@ -74,6 +74,7 @@ class EnemyManager:
                     self.spawnPlane("Yellow", "Big")
                 else:
                     self.spawnPlane("Yellow", "Small")
+        self.spawnDelay = randint(1, 3)
 
 
     def update_enemies(self, delta):
