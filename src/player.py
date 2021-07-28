@@ -51,5 +51,4 @@ class Player(Sprite):
                 self.canFire = True
 
         if not self.alive:
-            world.unload_play()
-            world.load_gameover()
+            world.game_over = True

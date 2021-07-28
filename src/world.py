@@ -11,6 +11,7 @@ import pygame
 class World:
 
     def init(self):
+        self.game_over = False
         self.load_menu()
 
     def load_menu(self):
@@ -92,6 +93,11 @@ class World:
             self.play_update(delta, inputMap)
         elif self.state == GAMEOVER_STATE:
             self.gameover_update(delta, inputMap)
+
+        if self.game_over:
+            self.unload_play()
+            self.load_gameover()
+            self.game_over = False
 
     def render(self, surface):
         if self.state == MENU_STATE:
