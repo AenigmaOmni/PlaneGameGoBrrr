@@ -7,12 +7,22 @@ from src.map import Map
 from src.player import Player
 from src.enemyManager import EnemyManager
 import pygame
+from pygame.locals import *
 
 class World:
 
     def init(self):
         self.game_over = False
         self.load_menu()
+        self.delay_menu = False
+        self.delay_gameover = False
+        self.delay_play = False
+        self.menu_delay = 1
+        self.gameover_delay = 1
+        self.menu_timer = 0
+        self.gameover_timer = 0
+        self.play_delay = 0.2
+        self.play_timer = 0
 
     def load_menu(self):
         self.state = MENU_STATE
@@ -20,6 +30,7 @@ class World:
         self.menu_text = self.menu_font.render("Plane Game Go Brrr", True, (255, 255, 255))    
         self.continue_font = pygame.font.SysFont(None, 60)
         self.continue_text = self.continue_font.render("Press Space to Play", True, (255, 255, 255))
+        self.delay_menu = True
 
     def unload_menu(self):
         self.menu_font = None
@@ -33,6 +44,7 @@ class World:
         self.gameover_text = self.gameover_font.render("Game Over", True, (255, 255, 255))
         self.continue_font = pygame.font.SysFont(None, 80)
         self.continue_text = self.continue_font.render("Press Space to Continue", True, (255, 255, 255))
+        self.delay_gameover = True
 
     def unload_gameover(self):
         self.gameover_font = None
@@ -55,15 +67,27 @@ class World:
         self.mapManager = MapManager()
         self.mapManager.load()
         self.enemyManager.spawn(2)
+        self.delay_play = True
 
     def play_update(self, delta, inputMap):
-        self.mapManager.update(delta)
-        self.player.update(delta, True, inputMap, self)
-        self.laserManager.update(delta, self.player, self.enemyManager.enemies)
-        self.enemyManager.update(delta)
+        if self.delay_play:
+            self.play_timer += delta
+            if self.play_timer >= self.play_delay:
+                self.play_timer = 0
+                self.delay_play = False
+        if self.delay_play == False:
+            self.mapManager.update(delta)
+            self.player.update(delta, True, inputMap, self)
+            self.laserManager.update(delta, self.player, self.enemyManager.enemies)
+            self.enemyManager.update(delta)
 
     def menu_update(self, delta, inputMap):
-        if inputMap.space == True:
+        if self.delay_menu:
+            self.menu_timer += delta
+            if self.menu_timer >= self.menu_delay:
+                self.delay_menu = False
+                self.menu_timer = 0
+        if inputMap.space and self.delay_menu == False:
             self.unload_menu()
             self.load_play()
 
@@ -72,7 +96,12 @@ class World:
         surface.blit(self.continue_text, (WINDOW_WIDTH / 2 - self.continue_text.get_size()[0] / 2, WINDOW_HEIGHT / 2))       
 
     def gameover_update(self, delta, inputMap):
-        if inputMap.space == True:
+        if self.delay_gameover:
+            self.gameover_timer += delta
+            if self.gameover_timer >= delta:
+                self.delay_gameover = False
+                self.gameover_timer = 0
+        if inputMap.space == True and self.delay_gameover == False:
             self.unload_gameover()
             self.load_menu()
 
