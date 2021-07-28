@@ -5,16 +5,17 @@ from random import *
 class EnemyManager:
     def __init__(self, lm):
         self.laserManager = lm
-        self.spawnDelay = randint(1, 3)
+        self.spawnDelay = randint(2, 4)
         self.maxSpawns = 4
         self.spawnTimer = 0
     
         self.enemies = []
 
-    def spawnEnemy(self, v, h, speed, hp):
-        e = Enemy()
+    def spawnEnemy(self, v, h, speed, hp, d):
+        e = Enemy(self.laserManager)
         e.vFrame = v
         e.hFrame = h
+        e.damage = d
         e.speed = speed
         e.load()
         e.scale()
@@ -29,28 +30,28 @@ class EnemyManager:
     def spawnPlane(self, color, size):
         if color == "Red":
             if size == "Big":
-                e = self.spawnEnemy(0, 1, 80, 2)
+                e = self.spawnEnemy(0, 1, 80, 2, 1)
                 self.enemies.append(e)
 
             else: #Red Small
-                e = self.spawnEnemy(1, 1, 60, 1)
+                e = self.spawnEnemy(1, 1, 60, 1, 1)
     
         elif color == "Green":
             if size == "Big":
-                e = self.spawnEnemy(0, 2, 100, 3)
+                e = self.spawnEnemy(0, 2, 100, 3, 2)
                 self.enemies.append(e)
 
             else: #Green Small
-                e = self.spawnEnemy(1, 2, 80, 2)
+                e = self.spawnEnemy(1, 2, 80, 2, 1)
                 self.enemies.append(e)
         
         elif color == "Yellow":
             if size == "Big":
-                e = self.spawnEnemy(0, 3, 110, 4)
+                e = self.spawnEnemy(0, 3, 110, 4, 2)
                 self.enemies.append(e)
 
             else: #Yellow Small
-                e = self.spawnEnemy(1, 3, 100, 3)
+                e = self.spawnEnemy(1, 3, 100, 3, 2)
                 self.enemies.append(e)
 
     def spawn(self, count):

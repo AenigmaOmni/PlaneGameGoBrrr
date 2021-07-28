@@ -70,6 +70,7 @@ class Game:
 
     def post_init(self):
         pygame.display.set_caption(TITLE)
+        pygame.mixer.set_num_channels(SOUND_CHANNELS)
         self.fpsLimit = FPS_LIMIT
         self.fpsClock = pygame.time.Clock()
         self.font = pygame.font.SysFont(None, 40)

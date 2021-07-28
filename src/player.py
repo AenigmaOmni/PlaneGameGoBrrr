@@ -15,12 +15,19 @@ class Player(Sprite):
         self.fireTimer = 0
         self.fireDelay = 0.2
         self.damage = 1
+        self.hp = 10
+        self.alive = True
+
+    def takeDamage(self, damage):
+        self.hp -= damage
+        if self.hp <= 0:
+            self.alive = False
 
     def load(self):
         super().load()
         self.scale()
 
-    def update(self, delta, doClamp, inputMap):
+    def update(self, delta, doClamp, inputMap, world):
         if inputMap.w == True:
             self.move_y = -1
         elif inputMap.s == True:
@@ -42,3 +49,7 @@ class Player(Sprite):
             if self.fireTimer >= self.fireDelay:
                 self.fireTimer = 0
                 self.canFire = True
+
+        if not self.alive:
+            world.unload_play()
+            world.load_gameover()
