@@ -17,8 +17,10 @@ class LaserManager:
         laser.scale()
         self.playerLasers.append(laser)
     
-    def enemyFire(self, x, y ,damage):
+    def enemyFire(self, x, y ,damage, v, h):
         b = EnemyBullet(x, y, damage)
+        b.vFrame = v
+        b.hFrame = h
         b.load()
         b.scale()
         self.enemyLasers.append(b)

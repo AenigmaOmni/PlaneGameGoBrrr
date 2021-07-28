@@ -1,5 +1,5 @@
 from pygame.display import update
-from src.globals import PLANE_SIZE
+from src.globals import PLANE_LETHAL_FIRE, PLANE_NORMAL_FIRE, PLANE_SIZE, TANK_FIRE, TANK_LETHAL_FIRE
 from src.sprite import Sprite
 
 
@@ -9,6 +9,7 @@ class Enemy(Sprite):
         super().__init__(imgPath, size)
         self.hFrame = 2
         self.vFrame = 0
+        self.fire_type = PLANE_NORMAL_FIRE
 
         self.fireTimer = 3
         self.fireDelay = 4
@@ -22,7 +23,16 @@ class Enemy(Sprite):
         self.laserManager = lmanager
 
     def fire(self):
-        self.laserManager.enemyFire(self.x + self.size / 2, self.y, self.damage)
+        x = self.x + self.size / 2
+        y = self.y
+        if self.fire_type == PLANE_NORMAL_FIRE:
+            self.laserManager.enemyFire(x, y, self.damage, 0, 2)
+        elif self.fire_type == PLANE_LETHAL_FIRE:
+            self.laserManager.enemyFire(x, y, self.damage, 0, 3)
+        elif self.fire_type == TANK_FIRE:
+            self.laserManager.enemyFire(x, y, self.damage, 0, 1)
+        elif self.fire_type == TANK_LETHAL_FIRE:
+            self.laserManager.enemyFire(x, y, self.damage, 0, 5)
 
     def takeDamage(self, damage):
         self.doTint = True

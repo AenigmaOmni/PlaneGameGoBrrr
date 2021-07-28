@@ -11,12 +11,13 @@ class EnemyManager:
     
         self.enemies = []
 
-    def spawnTankObject(self, v, h, hp, d):
+    def spawnTankObject(self, v, h, hp, d, ft):
         e = Enemy(self.laserManager, "res/tiles_ground.png", TANK_SIZE)
         e.vFrame = v
         e.hFrame = h
         e.damage = d
         e.move_y = 1
+        e.fire_type = ft
         e.speed = BG_SPEED
         e.hp = hp
         e.load()
@@ -27,12 +28,13 @@ class EnemyManager:
         e.apply_tint()
         return e
 
-    def spawnPlaneObject(self, v, h, speed, hp, d):
+    def spawnPlaneObject(self, v, h, speed, hp, d, ft):
         e = Enemy(self.laserManager, "res/ships_packed.png", PLANE_SIZE)
         e.vFrame = v
         e.hFrame = h
         e.damage = d
         e.speed = speed
+        e.fire_type = ft
         e.load()
         e.scale()
         e.load_tint_surface()
@@ -46,40 +48,40 @@ class EnemyManager:
     def spawnTank(self, color, size):
         if color == "Red":
             if size == "Big":
-                e = self.spawnTankObject(0, 1, 4, 1)
+                e = self.spawnTankObject(0, 1, 4, 1, TANK_FIRE)
                 self.enemies.append(e)
             else:
-                e = self.spawnTankObject(0, 2, 3, 1)
+                e = self.spawnTankObject(0, 2, 3, 1, TANK_FIRE)
                 self.enemies.append(e)   
         else:
-            e = self.spawnTankObject(1, 0, 5, 2)
+            e = self.spawnTankObject(1, 0, 5, 2, TANK_LETHAL_FIRE)
             self.enemies.append(e)          
 
     def spawnPlane(self, color, size):
         if color == "Red":
             if size == "Big":
-                e = self.spawnPlaneObject(0, 1, 80, 2, 1)
+                e = self.spawnPlaneObject(0, 1, 80, 2, 1, PLANE_NORMAL_FIRE)
                 self.enemies.append(e)
 
             else: #Red Small
-                e = self.spawnPlaneObject(1, 1, 60, 1, 1)
+                e = self.spawnPlaneObject(1, 1, 60, 1, 1, PLANE_NORMAL_FIRE)
     
         elif color == "Green":
             if size == "Big":
-                e = self.spawnPlaneObject(0, 2, 100, 3, 2)
+                e = self.spawnPlaneObject(0, 2, 100, 3, 2, PLANE_NORMAL_FIRE)
                 self.enemies.append(e)
 
             else: #Green Small
-                e = self.spawnPlaneObject(1, 2, 80, 2, 1)
+                e = self.spawnPlaneObject(1, 2, 80, 2, 1, PLANE_NORMAL_FIRE)
                 self.enemies.append(e)
         
         elif color == "Yellow":
             if size == "Big":
-                e = self.spawnPlaneObject(0, 3, 110, 4, 2)
+                e = self.spawnPlaneObject(0, 3, 110, 4, 2, PLANE_LETHAL_FIRE)
                 self.enemies.append(e)
 
             else: #Yellow Small
-                e = self.spawnPlaneObject(1, 3, 100, 3, 2)
+                e = self.spawnPlaneObject(1, 3, 100, 3, 2, PLANE_LETHAL_FIRE)
                 self.enemies.append(e)
 
     def spawn(self, count):
