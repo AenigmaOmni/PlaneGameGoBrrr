@@ -3,7 +3,7 @@ from src.map import Map
 
 class MapManager:
     def __init__(self):
-        self.speed = 50
+        self.speed = BG_SPEED
         self.map1 = None
         self.map2 = None
 
