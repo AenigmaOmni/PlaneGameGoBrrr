@@ -26,6 +26,7 @@ class World:
 
     def load_menu(self):
         self.state = MENU_STATE
+        self.menu_background = pygame.image.load("res/cover.png")
         self.menu_font = pygame.font.SysFont(None, 110)
         self.menu_text = self.menu_font.render("Plane Game Go Brrr", True, (255, 255, 255))    
         self.continue_font = pygame.font.SysFont(None, 60)
@@ -92,6 +93,7 @@ class World:
             self.load_play()
 
     def menu_render(self, surface):
+        surface.blit(self.menu_background, (0,0))
         surface.blit(self.menu_text, (WINDOW_WIDTH / 2 - self.menu_text.get_size()[0] / 2, WINDOW_HEIGHT / 2 - 100))
         surface.blit(self.continue_text, (WINDOW_WIDTH / 2 - self.continue_text.get_size()[0] / 2, WINDOW_HEIGHT / 2))       
 
