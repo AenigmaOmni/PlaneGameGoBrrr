@@ -4,9 +4,9 @@ from src.sprite import Sprite
 
 
 class Enemy(Sprite):
-    def __init__(self, lmanager):
+    def __init__(self, lmanager, imgPath, size):
         self.alive = True
-        super().__init__("res/ships_packed.png", PLANE_SIZE)
+        super().__init__(imgPath, size)
         self.hFrame = 2
         self.vFrame = 0
 

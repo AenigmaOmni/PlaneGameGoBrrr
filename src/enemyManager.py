@@ -12,7 +12,7 @@ class EnemyManager:
         self.enemies = []
 
     def spawnEnemy(self, v, h, speed, hp, d):
-        e = Enemy(self.laserManager)
+        e = Enemy(self.laserManager, "res/ships_packed.png", PLANE_SIZE)
         e.vFrame = v
         e.hFrame = h
         e.damage = d
