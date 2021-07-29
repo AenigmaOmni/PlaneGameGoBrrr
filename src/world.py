@@ -1,3 +1,4 @@
+from src.powerupManager import PowerupManager
 from src.laserManager import LaserManager
 from src.mapManager import MapManager
 from src.sprite import Sprite
@@ -59,6 +60,8 @@ class World:
         self.enemyManager = None
         self.player = None
         self.mapManager = None
+        self.hudManager = None
+        self.powerupManager = None
 
     def load_play(self):
         self.state = PLAY_STATE
@@ -71,6 +74,7 @@ class World:
         self.mapManager = MapManager()
         self.mapManager.load()
         self.enemyManager.spawn(2)
+        self.powerupManager = PowerupManager()
         self.delay_play = True
 
     def play_update(self, delta, inputMap):
@@ -85,6 +89,7 @@ class World:
             self.laserManager.update(delta, self.player, self.enemyManager.enemies)
             self.enemyManager.update(delta, self.player)
             self.hudManager.update(self.player)
+            self.powerupManager.update(delta, self.player)
 
     def menu_update(self, delta, inputMap):
         if self.delay_menu:
@@ -121,6 +126,7 @@ class World:
         self.enemyManager.render(surface)
         self.player.render(surface)
         self.hudManager.render(surface)
+        self.powerupManager.render(surface)
 
     def update(self, delta, inputMap):
         if self.state == MENU_STATE:

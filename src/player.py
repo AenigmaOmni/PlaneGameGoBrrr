@@ -21,6 +21,9 @@ class Player(Sprite):
         self.score = 0
         self.onWave = 1
 
+    def applyPowerup(self, p):
+        print("Got powerup")
+
     def takeDamage(self, damage):
         self.hp -= damage
         if self.hp <= 0:
