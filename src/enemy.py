@@ -19,6 +19,7 @@ class Enemy(Sprite):
 
         self.hp = 1
         self.damage = 1
+        self.score = 0
 
         self.laserManager = lmanager
 

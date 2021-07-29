@@ -54,9 +54,9 @@ class Game:
         self.world.render(self.screen)
 
         #stop rendering
-        img = self.font.render("FPS: " + str(round(self.fpsClock.get_fps())), True, (255, 255, 255))
+        #img = self.font.render("FPS: " + str(round(self.fpsClock.get_fps())), True, (255, 255, 255))
 
-        self.screen.blit(img, (20, 20))
+        #self.screen.blit(img, (20, 20))
 
         pygame.display.flip()
 

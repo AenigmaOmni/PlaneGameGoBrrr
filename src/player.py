@@ -18,6 +18,8 @@ class Player(Sprite):
         self.hp = 10
         self.alive = True
 
+        self.score = 0
+
     def takeDamage(self, damage):
         self.hp -= damage
         if self.hp <= 0:

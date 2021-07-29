@@ -6,6 +6,7 @@ from src.globals import *
 from src.map import Map
 from src.player import Player
 from src.enemyManager import EnemyManager
+from src.hudManager import HudManager
 import pygame
 from pygame.locals import *
 
@@ -65,6 +66,8 @@ class World:
         self.enemyManager = EnemyManager(self.laserManager)
         self.player = Player(self.laserManager)
         self.player.load()
+        self.hudManager = HudManager()
+        self.hudManager.load(self.player)
         self.mapManager = MapManager()
         self.mapManager.load()
         self.enemyManager.spawn(2)
@@ -81,6 +84,7 @@ class World:
             self.player.update(delta, True, inputMap, self)
             self.laserManager.update(delta, self.player, self.enemyManager.enemies)
             self.enemyManager.update(delta)
+            self.hudManager.update(self.player)
 
     def menu_update(self, delta, inputMap):
         if self.delay_menu:
@@ -116,6 +120,7 @@ class World:
         self.laserManager.render(surface)
         self.enemyManager.render(surface)
         self.player.render(surface)
+        self.hudManager.render(surface)
 
     def update(self, delta, inputMap):
         if self.state == MENU_STATE:

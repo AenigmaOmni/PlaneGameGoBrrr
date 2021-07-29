@@ -55,6 +55,7 @@ class LaserManager:
             for enemy in enemies:
                 if bullet.rect.colliderect(enemy.rect):
                     if not enemy.takeDamage(player.damage):
+                        player.score += enemy.score
                         self.em.spawnExplosion(enemy.x, enemy.y)
                     bullet.alive = False
 

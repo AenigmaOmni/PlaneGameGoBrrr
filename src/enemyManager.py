@@ -26,6 +26,7 @@ class EnemyManager:
         e.y = -REAL_PLANE_SIZE
         e.load_tint_surface()
         e.apply_tint()
+        e.score = 10 * hp + 10 * d
         return e
 
     def spawnPlaneObject(self, v, h, speed, hp, d, ft):
@@ -43,6 +44,7 @@ class EnemyManager:
         e.y = -REAL_PLANE_SIZE
         e.move_y = 1
         e.hp = hp
+        e.score = 10 * hp + 10 * d
         return e
 
     def spawnTank(self, color, size):
