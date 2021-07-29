@@ -1,13 +1,13 @@
 import random
 from src.globals import WINDOW_WIDTH
 from src.powerup import Powerup
-
+import math
 class PowerupManager:
     def __init__(self):
         self.powerups = []
-        self.maxScoreSpawn = 900
-        self.minScoreSpawn = 400
-        self.maxScoreMod = 1.5
+        self.maxScoreSpawn = 1000
+        self.minScoreSpawn = 500
+        self.maxScoreMod = 2
         self.scoreToSpawn = random.randint(self.minScoreSpawn, self.maxScoreSpawn)
         self.maxScoreSpawn = self.maxScoreSpawn * self.maxScoreMod
 
@@ -27,8 +27,8 @@ class PowerupManager:
         p.load()
         p.scale()
         self.powerups.append(p)
-        self.scoreToSpawn = random.randint(self.minScoreSpawn, self.maxScoreSpawn)
-        self.maxScoreSpawn = self.maxScoreSpawn * self.maxScoreMod
+        self.scoreToSpawn = random.randint(self.minScoreSpawn, math.floor(self.maxScoreSpawn))
+        self.maxScoreSpawn = math.floor(self.maxScoreSpawn * self.maxScoreMod)
 
     def update(self, delta, player):
         if player.score >= self.scoreToSpawn:

@@ -21,8 +21,13 @@ class Player(Sprite):
         self.score = 0
         self.onWave = 1
 
+        self.power = 3
+
     def applyPowerup(self, p):
-        print("Got powerup")
+        if p.type == 1:
+            self.hp = 10
+        else:
+            self.power += 1
 
     def takeDamage(self, damage):
         self.hp -= damage
@@ -48,7 +53,7 @@ class Player(Sprite):
         if inputMap.space == True:
             if self.canFire:
                 self.canFire = False
-                self.laserManager.playerFire(self.x + self.size / 2, self.y)
+                self.laserManager.playerFire(self.x + self.size / 2, self.y, self.power)
 
         if not self.canFire:
             self.fireTimer += delta

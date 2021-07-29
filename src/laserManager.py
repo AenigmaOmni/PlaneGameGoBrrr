@@ -11,12 +11,23 @@ class LaserManager:
         self.playerLasers = []
         self.enemyLasers = []
 
-    def playerFire(self, x, y):
-        laser = Laser(x, y)
-        laser.load()
-        laser.scale()
-        self.playerLasers.append(laser)
-    
+    def playerFire(self, x, y, power):
+        if power >= 4:
+            laser = Laser(x - 16, y, power)
+            laser.load()
+            laser.scale()
+            self.playerLasers.append(laser)
+
+            laser2 = Laser(x + 16, y, power)
+            laser2.load()
+            laser2.scale()
+            self.playerLasers.append(laser2)
+        else:
+            laser = Laser(x, y, power)
+            laser.load()
+            laser.scale()
+            self.playerLasers.append(laser)
+
     def enemyFire(self, x, y ,damage, v, h):
         b = EnemyBullet(x, y, damage)
         b.vFrame = v
