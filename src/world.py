@@ -76,6 +76,8 @@ class World:
         self.enemyManager.spawn(2)
         self.powerupManager = PowerupManager()
         self.delay_play = True
+        self.bg_music = pygame.mixer.music.load("res/My-Story.ogg")
+        pygame.mixer.music.play(-1)
 
     def play_update(self, delta, inputMap):
         if self.delay_play:
