@@ -1,12 +1,16 @@
 from src.globals import *
 from src.enemy import Enemy
 from random import *
+import math
 
 class EnemyManager:
     def __init__(self, lm):
         self.laserManager = lm
         self.spawnDelay = randint(2, 4)
-        self.maxSpawns = 4
+        self.wave = 1
+        self.maxSpawns = 2
+        self.spawnsPerWave = 12
+        self.spawnCount = 0
         self.spawnTimer = 0
     
         self.enemies = []
@@ -130,11 +134,19 @@ class EnemyManager:
                 alive.append(enemy)
         self.enemies = alive
 
-    def update(self, delta):
+    def update(self, delta, player):
         self.spawnTimer += delta
         if self.spawnTimer > self.spawnDelay:
             self.spawn(randint(1, self.maxSpawns))
             self.spawnTimer = 0
+            self.spawnCount += 1
+            if self.spawnCount >= self.spawnsPerWave:
+                self.spawnCount = 0
+                self.wave += 1
+                player.score += math.floor(400 * self.wave / 3)
+                player.onWave = self.wave
+                self.maxSpawns = self.wave / 3 + 2
+                self.maxSpawns = math.floor(self.maxSpawns)
 
         self.update_enemies(delta)
         self.remove_dead()

@@ -83,7 +83,7 @@ class World:
             self.mapManager.update(delta)
             self.player.update(delta, True, inputMap, self)
             self.laserManager.update(delta, self.player, self.enemyManager.enemies)
-            self.enemyManager.update(delta)
+            self.enemyManager.update(delta, self.player)
             self.hudManager.update(self.player)
 
     def menu_update(self, delta, inputMap):

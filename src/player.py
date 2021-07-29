@@ -19,6 +19,7 @@ class Player(Sprite):
         self.alive = True
 
         self.score = 0
+        self.onWave = 1
 
     def takeDamage(self, damage):
         self.hp -= damage
